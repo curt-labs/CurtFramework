@@ -1,3 +1,5 @@
+/* global document */
+
 require.config({
 	paths: {
 		angular: '/public/js/libs/angular/angular.min',
@@ -17,5 +19,15 @@ require.config({
 
 require(['jquery'], function () {
 	'use strict';
+
+	var tabs = document.querySelector('paper-tabs');
+	tabs.addEventListener('core-select',function(){
+		console.log('Selected: ' + tabs.selected);
+	});
+
+	var menu = document.querySelector('core-menu')
+	menu.addEventListener('core-activate', function(){
+		document.querySelector('core-drawer-panel').togglePanel();
+	});
 
 });

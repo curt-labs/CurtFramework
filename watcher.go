@@ -39,10 +39,12 @@ func main() {
 
 func doTests() {
 	exec.Command("killall", "index").Run()
-	gulp := exec.Command("gulp", "")
+	gulp := exec.Command("gulp", "default")
 	gulp.Stderr = os.Stderr
 	gulp.Stdout = os.Stdout
-	gulp.Run()
+	if err := gulp.Run(); err != nil {
+		log.Println(err)
+	}
 
 	gobuild := exec.Command("go", "build", "index.go")
 	gobuild.Stderr = os.Stderr
