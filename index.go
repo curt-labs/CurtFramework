@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -16,8 +17,14 @@ func main() {
 	flag.Parse()
 
 	r := gin.Default()
+	wd, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	r.LoadHTMLTemplates("templates/*")
+	r.ServeFiles("/public/*filepath", http.Dir(wd+"/public"))
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusFound, "Welcome home...")
+		c.HTML(http.StatusFound, "layout.html", nil)
 	})
 
 	s := &http.Server{

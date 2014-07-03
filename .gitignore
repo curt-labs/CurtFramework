@@ -22,9 +22,9 @@ _testmain.go
 *.exe
 *.test
 
+public/js/libs
 .sass-cache
 node_modules
-watcher.go
 index
 *.log
 requests.log
